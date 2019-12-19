@@ -5,7 +5,7 @@ app = Flask(__name__)
 app.config.from_object(os.environ['APP_SETTINGS'])
 
 words_set = []
-
+print('ENV: ' + os.environ['APP_SETTINGS'])
 
 def read_word_file():
     with open("words", "r") as f:
