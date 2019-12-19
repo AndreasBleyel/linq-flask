@@ -11,3 +11,18 @@ class Result(db.Model):
 
     def __repr__(self):
         return '<id {}>'.format(self.id)
+
+
+class Game(db.Model):
+    __tablename__ = 'games'
+
+    id = db.Column(db.Integer, primary_key=True)
+    nrplayer = db.Column(db.Integer)
+    nrround = db.Column(db.Integer)
+
+    def __init__(self, nrplayer, nrround):
+        self.nrplayer = nrplayer
+        self.nrround = nrround
+
+    def __repr__(self):
+        return '<id {}>'.format(self.id)

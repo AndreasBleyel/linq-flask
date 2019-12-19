@@ -8,6 +8,7 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db = SQLAlchemy(app)
 
 print('ENV: ' + os.environ['APP_SETTINGS'])
+from models import Game
 
 
 def create_words():
