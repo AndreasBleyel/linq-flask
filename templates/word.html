@@ -4,4 +4,12 @@
 
 <h1>{{ word }}</h1>
 
+    <form role="form" method='POST' action='/{{ plid }}'>
+        <div class="form-group">
+            Game ID
+          <input type="number" name="gameid" class="form-control" value={{ gameid }} id="gameid" placeholder="Game ID" min="1" style="max-width: 100px;" autofocus required>
+        </div>
+        <button type="submit" class="btn btn-default">Zeige Wort</button>
+      </form>
+
 {% endblock %}
