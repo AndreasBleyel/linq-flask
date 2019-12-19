@@ -7,15 +7,7 @@ app.config.from_object(os.environ['APP_SETTINGS'])
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db = SQLAlchemy(app)
 
-from models import Result
-
 print('ENV: ' + os.environ['APP_SETTINGS'])
-
-def file_to_db():
-    filename = 'words'
-
-
-    print('Words loaded from: ' + filename)
 
 
 def create_words():
