@@ -3,7 +3,16 @@
 {% block content %}
 
     <h1>Frisch gemischt</h1>
-    <h1>Runde: {{ round }}</h1>
     <h1>Game ID: {{ gameid }}</h1>
+    <h1>Runde: {{ round }}</h1>
+
+    <form role="form" method='POST' action='/s'>
+        <div class="form-group">
+            <input type="number" name="shuffle" class="form-control form-control-lg"
+                   value={{ gameid }} id="shuffle" placeholder="Game ID" min="1"
+                   style="max-width: 100px;" autofocus required>
+        </div>
+        <button type="submit" class="btn btn-primary btn-lg">Mischen</button>
+    </form>
 
 {% endblock %}

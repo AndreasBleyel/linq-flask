@@ -1,4 +1,4 @@
-import os, random
+import os, random, logging
 from flask import Flask, render_template, request
 from flask_sqlalchemy import SQLAlchemy
 
@@ -34,7 +34,7 @@ def create_words(gameid):
         print("4 Spieler")
         words.extend(words)
         random.shuffle(words)
-        words.extend(["Nur 4 Spieler","Nur 4 Spieler","Nur 4 Spieler","Nur 4 Spieler"])
+        words.extend(["Nur 4 Spieler", "Nur 4 Spieler", "Nur 4 Spieler", "Nur 4 Spieler"])
     elif nr_players == 5:
         words.extend(words)
         words.append("Du bist der Freigeist")
@@ -67,24 +67,30 @@ def create_words(gameid):
     for word in words:
         print(word)
 
-    cards = Cards(
-        gameid=gameid,
-        p1=words[0],
-        p2=words[1],
-        p3=words[2],
-        p4=words[3],
-        p5=words[4],
-        p6=words[5],
-        p7=words[6],
-        p8=words[7]
-    )
-
     if db.session.query(Cards.id).filter_by(gameid=gameid).first():
-        db.session.query(Cards).filter_by(gameid=gameid).update(cards, synchronize_session = False)
         print("Game exists")
+        db.session.query(Cards).filter_by(gameid=gameid).update({'p1': words[0],
+                                                                 'p2': words[1],
+                                                                 'p3': words[2],
+                                                                 'p4': words[3],
+                                                                 'p5': words[4],
+                                                                 'p6': words[5],
+                                                                 'p7': words[6],
+                                                                 'p8': words[7]})
     else:
-        db.session.add(cards)
         print("New Cards")
+        cards = Cards(
+            gameid=gameid,
+            p1=words[0],
+            p2=words[1],
+            p3=words[2],
+            p4=words[3],
+            p5=words[4],
+            p6=words[5],
+            p7=words[6],
+            p8=words[7]
+        )
+        db.session.add(cards)
 
     db.session.commit()
 
@@ -114,10 +120,26 @@ def index():
     return render_template('index.html')
 
 
-@app.route('/s')
+@app.route('/s', methods=['GET', 'POST'])
 def shuffle():
-    create_words()
-    return render_template("shuffle.html", round='not yet')
+    errors = []
+
+    if request.method == 'POST':
+        try:
+            gameid = int(request.form['shuffle'])
+            print("s gid: " + str(gameid))
+            print(type(gameid))
+            create_words(gameid)
+            db.session.query(Game.nrround).filter_by(id=gameid).update({'nrround': Game.nrround + 1})
+            db.session.commit()
+            nrround = db.session.query(Game.nrround).filter_by(id=gameid).first()[0]
+            return render_template("shuffle.html", round=nrround, gameid=gameid)
+        except:
+            errors.append(
+                "Something went wrong /shuffle"
+            )
+
+    return render_template("shuffle.html", round='-')
 
 
 @app.route('/d')
@@ -160,6 +182,7 @@ def send_word_p2():
 
     return render_template("word.html", word='Noch kein Wort', plid=2)
 
+
 @app.route('/3', methods=['GET', 'POST'])
 def send_word_p3():
     errors = []
@@ -176,6 +199,7 @@ def send_word_p3():
             )
 
     return render_template("word.html", word='Noch kein Wort', plid=3)
+
 
 @app.route('/4', methods=['GET', 'POST'])
 def send_word_p4():
@@ -194,6 +218,7 @@ def send_word_p4():
 
     return render_template("word.html", word='Noch kein Wort', plid=4)
 
+
 @app.route('/5', methods=['GET', 'POST'])
 def send_word_p5():
     errors = []
@@ -210,6 +235,7 @@ def send_word_p5():
             )
 
     return render_template("word.html", word='Noch kein Wort', plid=5)
+
 
 @app.route('/6', methods=['GET', 'POST'])
 def send_word_p6():
@@ -228,6 +254,7 @@ def send_word_p6():
 
     return render_template("word.html", word='Noch kein Wort', plid=6)
 
+
 @app.route('/7', methods=['GET', 'POST'])
 def send_word_p7():
     errors = []
@@ -245,6 +272,7 @@ def send_word_p7():
 
     return render_template("word.html", word='Noch kein Wort', plid=7)
 
+
 @app.route('/8', methods=['GET', 'POST'])
 def send_word_p8():
     errors = []
@@ -261,6 +289,7 @@ def send_word_p8():
             )
 
     return render_template("word.html", word='Noch kein Wort', plid=8)
+
 
 if __name__ == '__main__':
     app.run()
