@@ -21,9 +21,11 @@ def create_words(gameid):
     print(nr_players)
     print(type(nr_players))
 
-
     id_word1 = random.randint(0, nr_rows - 1)
+
     id_word2 = random.randint(0, nr_rows - 1)
+    while id_word2 == id_word1:
+        id_word2 = random.randint(0, nr_rows - 1)
 
     words.append(db.session.query(Result.word).filter_by(id=id_word1).first())
     words.append(db.session.query(Result.word).filter_by(id=id_word2).first())
@@ -40,21 +42,27 @@ def create_words(gameid):
         words.extend(["Nur 5 Spieler", "Nur 5 Spieler", "Nur 5 Spieler"])
     elif nr_players == 6:
         words.extend(words)
-        words.extend(words)
+        words.append("Du bist der Freigeist")
+        words.append("Du bist der Freigeist")
         random.shuffle(words)
         words.extend(["Nur 6 Spieler", "Nur 6 Spieler"])
-    elif nr_players == 7:
-        words.extend(words)
-        words.extend(words)
-        words.append("Du bist der Freigeist")
-        random.shuffle(words)
-        words.extend(["Nur 7 Spieler"])
-    elif nr_players == 8:
-        words.extend(words)
-        words.extend(words)
-        words.append("Du bist der Freigeist")
-        words.append("Du bist der Freigeist")
-        random.shuffle(words)
+    elif nr_players > 6:
+        id_word3 = random.randint(0, nr_rows - 1)
+        while id_word3 == id_word2:
+            id_word3 = random.randint(0, nr_rows - 1)
+
+        words.append(db.session.query(Result.word).filter_by(id=id_word3).first())
+
+        if nr_players == 7:
+            words.extend(words)
+            words.append("Du bist der Freigeist")
+            random.shuffle(words)
+            words.append("Nur 7 Spieler")
+        elif nr_players == 8:
+            words.extend(words)
+            words.append("Du bist der Freigeist")
+            words.append("Du bist der Freigeist")
+            random.shuffle(words)
 
     for word in words:
         print(word)
@@ -152,6 +160,107 @@ def send_word_p2():
 
     return render_template("word.html", word='Noch kein Wort', plid=2)
 
+@app.route('/3', methods=['GET', 'POST'])
+def send_word_p3():
+    errors = []
+
+    if request.method == 'POST':
+        try:
+            game_id = request.form['gameid']
+            word = db.session.query(Cards.p3).filter_by(gameid=game_id).first()[0]
+
+            return render_template("word.html", word=word, plid=3, gameid=game_id)
+        except:
+            errors.append(
+                "Falsche Spieleranzahl. Mögliche Anzahl sind 4-8 Spieler"
+            )
+
+    return render_template("word.html", word='Noch kein Wort', plid=3)
+
+@app.route('/4', methods=['GET', 'POST'])
+def send_word_p4():
+    errors = []
+
+    if request.method == 'POST':
+        try:
+            game_id = request.form['gameid']
+            word = db.session.query(Cards.p4).filter_by(gameid=game_id).first()[0]
+
+            return render_template("word.html", word=word, plid=4, gameid=game_id)
+        except:
+            errors.append(
+                "Falsche Spieleranzahl. Mögliche Anzahl sind 4-8 Spieler"
+            )
+
+    return render_template("word.html", word='Noch kein Wort', plid=4)
+
+@app.route('/5', methods=['GET', 'POST'])
+def send_word_p5():
+    errors = []
+
+    if request.method == 'POST':
+        try:
+            game_id = request.form['gameid']
+            word = db.session.query(Cards.p5).filter_by(gameid=game_id).first()[0]
+
+            return render_template("word.html", word=word, plid=5, gameid=game_id)
+        except:
+            errors.append(
+                "Falsche Spieleranzahl. Mögliche Anzahl sind 4-8 Spieler"
+            )
+
+    return render_template("word.html", word='Noch kein Wort', plid=5)
+
+@app.route('/6', methods=['GET', 'POST'])
+def send_word_p6():
+    errors = []
+
+    if request.method == 'POST':
+        try:
+            game_id = request.form['gameid']
+            word = db.session.query(Cards.p6).filter_by(gameid=game_id).first()[0]
+
+            return render_template("word.html", word=word, plid=6, gameid=game_id)
+        except:
+            errors.append(
+                "Falsche Spieleranzahl. Mögliche Anzahl sind 4-8 Spieler"
+            )
+
+    return render_template("word.html", word='Noch kein Wort', plid=6)
+
+@app.route('/7', methods=['GET', 'POST'])
+def send_word_p7():
+    errors = []
+
+    if request.method == 'POST':
+        try:
+            game_id = request.form['gameid']
+            word = db.session.query(Cards.p7).filter_by(gameid=game_id).first()[0]
+
+            return render_template("word.html", word=word, plid=7, gameid=game_id)
+        except:
+            errors.append(
+                "Falsche Spieleranzahl. Mögliche Anzahl sind 4-8 Spieler"
+            )
+
+    return render_template("word.html", word='Noch kein Wort', plid=7)
+
+@app.route('/8', methods=['GET', 'POST'])
+def send_word_p8():
+    errors = []
+
+    if request.method == 'POST':
+        try:
+            game_id = request.form['gameid']
+            word = db.session.query(Cards.p8).filter_by(gameid=game_id).first()[0]
+
+            return render_template("word.html", word=word, plid=8, gameid=game_id)
+        except:
+            errors.append(
+                "Falsche Spieleranzahl. Mögliche Anzahl sind 4-8 Spieler"
+            )
+
+    return render_template("word.html", word='Noch kein Wort', plid=8)
 
 if __name__ == '__main__':
     app.run()
