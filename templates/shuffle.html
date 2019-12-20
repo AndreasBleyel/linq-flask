@@ -1,18 +1,26 @@
 {% extends "main.html" %}
 
 {% block content %}
-
-    <h1>Frisch gemischt</h1>
-    <h1>Game ID: {{ gameid }}</h1>
-    <h1>Runde: {{ round }}</h1>
-
-    <form role="form" method='POST' action='/s'>
-        <div class="form-group">
-            <input type="number" name="shuffle" class="form-control form-control-lg"
-                   value={{ gameid }} id="shuffle" placeholder="Game ID" min="1"
-                   style="max-width: 100px;" autofocus required>
-        </div>
-        <button type="submit" class="btn btn-primary btn-lg">Mischen</button>
-    </form>
-
+    <div class="row">
+        <h1>Frisch gemischt</h1>
+        <h1>Game ID: {{ gameid }}</h1>
+        <p>Teile diese ID mit den teilnehmenden Spielern.<br/>
+            Sie wird benötigt um dem jeweiligen Spieler sein Wort anzuzeigen.<br/></p>
+            <p>Jeder Spieler kann sich unter<br/>
+            <font color="blue">https://linq-pro.herokuapp.com/[Spielernummer]</font><br/>
+            sein Wort unter Angabe der der Game-ID anzeigen lassen.<br/>
+            [Spielernummer] durch die Ziffer 1-8 ersetzen.<br/>
+                Beispiel: <font color="blue">https://linq-pro.herokuapp.com/3</font></p>
+        <h1>Runde: {{ round }}</h1>
+    </div>
+    <div class="row">
+        <form role="form" method='POST' action='/s'>
+            <div class="form-group">
+                <input type="number" name="shuffle" class="form-control form-control-lg"
+                       value={{ gameid }} id="shuffle" placeholder="Game ID" min="1"
+                       style="max-width: 100px;" autofocus required>
+            </div>
+            <button type="submit" class="btn btn-primary btn-lg">Mischen</button>
+        </form>
+    </div>
 {% endblock %}
