@@ -2,10 +2,75 @@
 
 {% block content %}
 
-<ul id="listwords">
-    {% for word in words %}
-        <li>{{ word }}"</li>
-    {% endfor %}
-</ul>
+    <div class="container">
+        <h1>Games</h1>
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th scope="col">Game ID</th>
+                <th scope="col">Players</th>
+                <th scope="col">Round</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for game in games %}
+                <tr>
+                    <td>{{ game.id }}</td>
+                    <td>{{ game.nrplayer }} </td>
+                    <td>{{ game.nrround }}</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    <div class="container">
+        <h1>Cards</h1>
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th scope="col">ID</th>
+                <th scope="col">GameID</th>
+                <th scope="col">P1</th>
+                <th scope="col">P2</th>
+                <th scope="col">P3</th>
+                <th scope="col">P4</th>
+                <th scope="col">P5</th>
+                <th scope="col">P6</th>
+                <th scope="col">P7</th>
+                <th scope="col">P8</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for card in cards %}
+                <tr>
+                    <td>{{ card.id }}</td>
+                    <td>{{ card.gameid }} </td>
+                    <td>{{ card.p1 }}</td>
+                    <td>{{ card.p2 }}</td>
+                    <td>{{ card.p3 }}</td>
+                    <td>{{ card.p4 }}</td>
+                    <td>{{ card.p5 }}</td>
+                    <td>{{ card.p6 }}</td>
+                    <td>{{ card.p7 }}</td>
+                    <td>{{ card.p8 }}</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    <div class="container">
+        <h1>All Words</h1>
+        <table class="table table-striped">
+            <tbody>
+            {% for word in words %}
+                <tr>
+                    <td>{{ word.word }}</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>#}
 
 {% endblock %}

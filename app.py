@@ -144,7 +144,10 @@ def shuffle():
 
 @app.route('/d')
 def debug():
-    return render_template("debug.html", words='not yet')
+    games = db.session.query(Game).all()
+    cards = db.session.query(Cards).all()
+    words = db.session.query(Result).all()
+    return render_template("debug.html", games=games, cards=cards, words=words)
 
 
 @app.route('/1', methods=['GET', 'POST'])
