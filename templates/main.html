@@ -3,17 +3,24 @@
 <head>
     <title>Frohe Weihnachten</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
     <link href="//netdna.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet" media="screen">
 </head>
 
 <body>
-<div class="container">
-    <nav class="navbar navbar-light bg-light">
+<div align="center">
+    <div class="container" style="margin: 20px 20px 20px 20px; padding-top: 5px; background-color:powderblue"
+         align="center">
         <img src="https://image.flaticon.com/icons/png/512/1358/1358915.png" width="50" height="50" alt="">
-    </nav>
-        {% block content %}
+        <img src="https://image.flaticon.com/icons/png/512/1358/1358915.png" width="50" height="50" alt="">
+        <img src="https://image.flaticon.com/icons/png/512/1358/1358915.png" width="50" height="50" alt="">
+        <img src="https://image.flaticon.com/icons/png/512/1358/1358915.png" width="50" height="50" alt="">
+        <div class="row" style="padding: 20px 5px 5px 5px;">
+            {% block content %}
 
-        {% endblock %}
+            {% endblock %}
+        </div>
+    </div>
 </div>
 <script src="//code.jquery.com/jquery-2.2.1.min.js"></script>
 <script src="//netdna.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>

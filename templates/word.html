@@ -1,15 +1,20 @@
 {% extends "main.html" %}
 
 {% block content %}
-
-<h1>{{ word }}</h1>
-
-    <form role="form" method='POST' action='/{{ plid }}'>
-        <div class="form-group">
-            <label for="gameid">Game ID</label>
-            <input type="number" name="gameid" class="form-control form-control-lg" value={{ gameid }} id="gameid" placeholder="Game ID" min="1" style="max-width: 100px;" autofocus required>
+        <div class="card">
+            <div class="container-card">
+                <span style="font-size: x-large">{{ word }}</span>
+            </div>
         </div>
-        <button type="submit" class="btn btn-primary btn-lg">Zeige Wort</button>
-      </form>
 
+    <div style="margin-top: 20px">
+        <form role="form" method='POST' action='/{{ plid }}'>
+            <div class="form-group">
+                <label for="gameid">Game ID</label>
+                <input type="number" name="gameid" class="form-control form-control-lg" value={{ gameid }} id="gameid"
+                       placeholder="Game ID" min="1" style="max-width: 100px;" autofocus required>
+            </div>
+            <button type="submit" class="btn btn-primary btn-lg">Zeige Wort</button>
+        </form>
+    </div>
 {% endblock %}
