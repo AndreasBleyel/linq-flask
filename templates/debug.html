@@ -4,7 +4,7 @@
 
     <div class="container">
         <h1>Games</h1>
-        <table class="table table-striped table-bordered">
+        <table class="table table-striped table-bordered table-fit">
             <thead>
             <tr>
                 <th scope="col">Game ID</th>
@@ -26,7 +26,7 @@
 
     <div class="container">
         <h1>Cards</h1>
-        <table class="table table-striped table-bordered">
+        <table class="table table-striped table-bordered table-fit">
             <thead>
             <tr>
                 <th scope="col">ID</th>
@@ -62,8 +62,9 @@
 
     <div class="container">
         <h1>All Words</h1>
-        <table class="table table-striped table-bordered">
+        <table class="table table-striped table-bordered table-fit">
             <tbody>
+            <tr>Summe: {{ words|length }}</tr>
             {% for word in words %}
                 <tr>
                     <td>{{ word.word }}</td>
