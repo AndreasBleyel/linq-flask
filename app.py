@@ -158,8 +158,8 @@ def send_word_p1():
         try:
             game_id = request.form['gameid']
             word = db.session.query(Cards.p1).filter_by(gameid=game_id).first()[0]
-
-            return render_template("word.html", word=word, plid=1, gameid=game_id)
+            round = db.session.query(Game.nrround).filter_by(id=game_id).first()[0]
+            return render_template("word.html", word=word, plid=1, gameid=game_id, round=round)
         except:
             errors.append(
                 "Falsche Spieleranzahl. Mögliche Anzahl sind 4-8 Spieler"
@@ -176,8 +176,9 @@ def send_word_p2():
         try:
             game_id = request.form['gameid']
             word = db.session.query(Cards.p2).filter_by(gameid=game_id).first()[0]
+            round = db.session.query(Game.nrround).filter_by(id=game_id).first()[0]
 
-            return render_template("word.html", word=word, plid=2, gameid=game_id)
+            return render_template("word.html", word=word, plid=2, gameid=game_id, round=round)
         except:
             errors.append(
                 "Falsche Spieleranzahl. Mögliche Anzahl sind 4-8 Spieler"
@@ -194,8 +195,9 @@ def send_word_p3():
         try:
             game_id = request.form['gameid']
             word = db.session.query(Cards.p3).filter_by(gameid=game_id).first()[0]
+            round = db.session.query(Game.nrround).filter_by(id=game_id).first()[0]
 
-            return render_template("word.html", word=word, plid=3, gameid=game_id)
+            return render_template("word.html", word=word, plid=3, gameid=game_id, round=round)
         except:
             errors.append(
                 "Falsche Spieleranzahl. Mögliche Anzahl sind 4-8 Spieler"
@@ -212,8 +214,9 @@ def send_word_p4():
         try:
             game_id = request.form['gameid']
             word = db.session.query(Cards.p4).filter_by(gameid=game_id).first()[0]
+            round = db.session.query(Game.nrround).filter_by(id=game_id).first()[0]
 
-            return render_template("word.html", word=word, plid=4, gameid=game_id)
+            return render_template("word.html", word=word, plid=4, gameid=game_id, round=round)
         except:
             errors.append(
                 "Falsche Spieleranzahl. Mögliche Anzahl sind 4-8 Spieler"
@@ -230,8 +233,9 @@ def send_word_p5():
         try:
             game_id = request.form['gameid']
             word = db.session.query(Cards.p5).filter_by(gameid=game_id).first()[0]
+            round = db.session.query(Game.nrround).filter_by(id=game_id).first()[0]
 
-            return render_template("word.html", word=word, plid=5, gameid=game_id)
+            return render_template("word.html", word=word, plid=5, gameid=game_id, round=round)
         except:
             errors.append(
                 "Falsche Spieleranzahl. Mögliche Anzahl sind 4-8 Spieler"
@@ -248,8 +252,9 @@ def send_word_p6():
         try:
             game_id = request.form['gameid']
             word = db.session.query(Cards.p6).filter_by(gameid=game_id).first()[0]
+            round = db.session.query(Game.nrround).filter_by(id=game_id).first()[0]
 
-            return render_template("word.html", word=word, plid=6, gameid=game_id)
+            return render_template("word.html", word=word, plid=6, gameid=game_id, round=round)
         except:
             errors.append(
                 "Falsche Spieleranzahl. Mögliche Anzahl sind 4-8 Spieler"
@@ -266,8 +271,9 @@ def send_word_p7():
         try:
             game_id = request.form['gameid']
             word = db.session.query(Cards.p7).filter_by(gameid=game_id).first()[0]
+            round = db.session.query(Game.nrround).filter_by(id=game_id).first()[0]
 
-            return render_template("word.html", word=word, plid=7, gameid=game_id)
+            return render_template("word.html", word=word, plid=7, gameid=game_id, round=round)
         except:
             errors.append(
                 "Falsche Spieleranzahl. Mögliche Anzahl sind 4-8 Spieler"
@@ -284,8 +290,9 @@ def send_word_p8():
         try:
             game_id = request.form['gameid']
             word = db.session.query(Cards.p8).filter_by(gameid=game_id).first()[0]
+            round = db.session.query(Game.nrround).filter_by(id=game_id).first()[0]
 
-            return render_template("word.html", word=word, plid=8, gameid=game_id)
+            return render_template("word.html", word=word, plid=8, gameid=game_id, round=round)
         except:
             errors.append(
                 "Falsche Spieleranzahl. Mögliche Anzahl sind 4-8 Spieler"
